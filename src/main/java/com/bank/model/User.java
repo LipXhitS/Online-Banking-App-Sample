@@ -1,3 +1,5 @@
+package com.bank.model;
+
 public class User {
     private final String userId;
     private String username;

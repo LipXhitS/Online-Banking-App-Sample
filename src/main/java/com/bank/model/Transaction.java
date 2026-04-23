@@ -1,3 +1,5 @@
+package com.bank.model;
+
 public class Transaction {
     private final String transactionID;
     private String type;

@@ -1,8 +1,8 @@
 
 import java.io.Console;
 
-public class CommandLineUI {
-    public static void main(String[] args) {
+
+public class CommandLineUI {    public static void main(String[] args) {
         Console console = System.console();
         System.out.println("Welcome to Bank");
 
