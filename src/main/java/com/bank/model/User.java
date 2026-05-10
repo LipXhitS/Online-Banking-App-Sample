@@ -4,40 +4,39 @@ public class User {
     private final String userId;
     private String username;
     private String userNumber;
-    private int userPIN;
+    private int userPin;
 
     public User(String userId, String username, String userNumber, int userPin) {
         this.userId = userId;
         this.username = username;
         this.userNumber = userNumber;
-        this.userPIN = userPin;
+        this.userPin = userPin;
     }
 
-    public String userIdGetter() {
-        return this.userId;
+    public String getUserId() {
+        return userId;
     }
 
-    public String usernameGetter() {
-        return this.username;
+    public String getUsername() {
+        return username;
     }
 
-    public void usernameSetter(String username) {
-        this.username = username;
+    public String getUserNumber() {
+        return userNumber;
     }
 
-    public String userNumberGetter() {
-        return this.userNumber;
+    public boolean matchesLogin(String input) {
+        return input != null && (input.equals(username) || input.equals(userNumber));
     }
 
-    public void userNumberSetter(String userNumber) {
-        this.userNumber = userNumber;
+    public boolean validatePin(int inputPin) {
+        return this.userPin == inputPin;
     }
 
-    public int userPINGetter() {
-        return this.userPIN;
-    }
-
-    public void userPINSetter(int userPIN) {
-        this.userPIN = userPIN;
+    public void changePin(int oldPin, int newPin) {
+        if (!validatePin(oldPin)) {
+            throw new RuntimeException("Invalid current PIN");
+        }
+        this.userPin = newPin;
     }
 }

@@ -1,22 +1,27 @@
 package com.bank.service;
 
+import com.bank.exception.InvalidCredentialsException;
 import com.bank.model.User;
-import java.util.ArrayList;
-import java.util.List;
+import com.bank.repository.UserRepository;
 
 public class AuthService {
-    public User login(String usernameNumber, int userPin) {
-        List<User> users = new ArrayList<>();
-        users.add(new User("00001", "User1", "12345", 1234));
-        users.add(new User("00002", "User2", "12345", 1234));
-        users.add(new User("00003", "User3", "12345", 1234));
-        for (User user : users) {
-            if ((user.usernameGetter().equals(usernameNumber) || 
-                user.userNumberGetter().equals(usernameNumber))
-                && user.userPINGetter() == userPin) {
-               return user;
-            }
+
+    private final UserRepository userRepository;
+
+    public AuthService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User login(String input, int pin) {
+        User user = userRepository.findByLogin(input);
+
+        if (user == null || !user.validatePin(pin)) {
+            throw new InvalidCredentialsException();
         }
-        return null;
+
+        return user;
+    }
+
+    public void logout() {
     }
 }
